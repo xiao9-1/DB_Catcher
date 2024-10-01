@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список файлов</title>
+</head>
+<body>
+    <h1>Список файлов</h1>
+    <ul>
+        {% for file, creation_time in files %}
+        <li>
+            {{ file }} - {{ creation_time }} 
+            (<a href="/view/{{ file }}">посмотреть</a>, <a href="/download/{{ file }}">скачать</a>)
+        </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="/last_request_info">Информация о последнем запросе</a>
+</body>
+</html>
+
+

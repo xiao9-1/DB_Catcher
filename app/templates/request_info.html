@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о запросе</title>
+</head>
+<body>
+    <h1>Информация о последнем запросе</h1>
+    <ul>
+        <li>Метод запроса: {{ info.method }}</li>
+        <li>Путь запроса: {{ info.path }}</li>
+        <li>IP-адрес: {{ info.remote_addr }}</li>
+        <li>User-Agent: {{ info.user_agent }}</li>
+    </ul>
+</body>
+</html>
