@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Passw0rd
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      - db_catcher_network
+
+  python_app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: python_app
+    environment:
+      - DB_HOST=mssql
+      - DB_PORT=1433
+      - DB_USER=sa
+      - DB_NAME=your_database # Имя базы данных
+      - DB_PASSWORD=YourStrong!Passw0rd # Пароль
+      - DATA_DIR=./data      
+      - SQL_QUERY=SELECT * FROM books  # Ваш SQL-запрос
+      - QUERY_INTERVAL=60  # Время между опросами (секунды)
+      - FILE_LIFETIME=600  # Время жизни файлов (секунды)
+      - TZ=Europe/Moscow
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8090:8090"  # Для HTTP-сервиса
+    volumes:
+      - ./data:/app/data  # Папка для хранения данных
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - mssql
+    networks:
+      - db_catcher_network
+
+volumes:
+  mssql_data:
+
+networks:
+  db_catcher_network:
