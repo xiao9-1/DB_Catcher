@@ -19,7 +19,7 @@
 1. Клонируйте репозиторий:
 
 ```bash
-git clone https://github.com/xiao9-1s/DB_Catcher.git
+git clone https://github.com/xiao9-1/DB_Catcher.git
 ```
 ```bash
 cd DB_Catcher
